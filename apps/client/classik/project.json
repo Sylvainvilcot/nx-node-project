@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/client/classik",
+  "sourceRoot": "apps/client/classik/src",
+  "prefix": "node-project",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/client/classik",
+        "index": "apps/client/classik/src/index.html",
+        "main": "apps/client/classik/src/main.ts",
+        "polyfills": "apps/client/classik/src/polyfills.ts",
+        "tsConfig": "apps/client/classik/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/client/classik/src/favicon.ico",
+          "apps/client/classik/src/assets"
+        ],
+        "styles": ["apps/client/classik/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/client/classik/src/environments/environment.ts",
+              "with": "apps/client/classik/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "client-classik:build:production"
+        },
+        "development": {
+          "browserTarget": "client-classik:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "client-classik:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/client/classik/src/**/*.ts",
+          "apps/client/classik/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/client/classik"],
+      "options": {
+        "jestConfig": "apps/client/classik/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

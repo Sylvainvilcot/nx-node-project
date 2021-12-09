@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "projects": {
+    "api-klassiq": "apps/api/klassiq",
+    "client-classik": "apps/client/classik",
+    "client-classik-e2e": "apps/client/classik-e2e"
+  }
+}

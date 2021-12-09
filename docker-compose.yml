@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  client-classik:
+    image: node-project/client-classik
+    build:
+      context: .
+      dockerfile: ./apps/client/classik/Dockerfile
+    command: npm run start client-classik
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "4200:4200"
+
+  api-klassiq:
+    image: node-project/api-klassiq
+    build:
+      context: .
+      dockerfile: ./apps/api/klassiq/Dockerfile
+    command: npm run start api-klassiq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo:/usr/src/app
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+volumes:
+  node_modules:
+  mongo:
