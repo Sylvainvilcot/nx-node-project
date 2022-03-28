@@ -12,6 +12,11 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "4200:4200"
+    networks:
+      - public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.clientcloud.rule=Host(`cloud.docker.localhost`)
 
   api-klassiq:
     image: node-project/api-klassiq
@@ -26,6 +31,12 @@ services:
       - "3000:3000"
     depends_on:
       - mongo
+    networks:
+      - public
+      - private
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.servercloud.rule=(Host(`cloud.docker.localhost`) && PathPrefix(`/api`)) || Host(`api-cloud.docker.localhost`)
 
   mongo:
     image: mongo
@@ -40,3 +51,9 @@ services:
 volumes:
   node_modules:
   mongo:
+
+networks:
+  private:
+  public:
+    name: traefik_webgateway
+    external: true

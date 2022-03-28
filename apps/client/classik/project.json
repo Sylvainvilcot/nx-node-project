@@ -61,7 +61,9 @@
           "browserTarget": "client-classik:build:production"
         },
         "development": {
-          "browserTarget": "client-classik:build:development"
+          "browserTarget": "client-classik:build:development",
+          "disableHostCheck": true,
+          "host": "0.0.0.0"
         }
       },
       "defaultConfiguration": "development"
