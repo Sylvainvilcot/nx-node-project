@@ -2,58 +2,24 @@ version: '3'
 
 services:
   client-classik:
-    image: node-project/client-classik
-    build:
-      context: .
-      dockerfile: ./apps/client/classik/Dockerfile
-    command: npm run start client-classik
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+    image: cloudprojectvinci.azurecr.io/cloudprojectsupdevinci/client:1.1
+    container_name: cloudprojectvinci-client
+    domainname: cloudgaming
     ports:
-      - "4200:4200"
-    networks:
-      - public
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.clientcloud.rule=Host(`cloud.docker.localhost`)
+      - 80:80
 
   api-klassiq:
-    image: node-project/api-klassiq
-    build:
-      context: .
-      dockerfile: ./apps/api/klassiq/Dockerfile
-    command: npm run start api-klassiq
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+    image: cloudprojectvinci.azurecr.io/cloudprojectsupdevinci/api:1.1
+    container_name: cloudprojectvinci-api
+    domainname: cloudgaming
     ports:
-      - "3000:3000"
-    depends_on:
-      - mongo
-    networks:
-      - public
-      - private
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.servercloud.rule=(Host(`cloud.docker.localhost`) && PathPrefix(`/api`)) || Host(`api-cloud.docker.localhost`)
-
+      - 3000:3000
   mongo:
     image: mongo
-    volumes:
-      - mongo:/usr/src/app
     ports:
-      - "27017:27017"
+      - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-
-volumes:
-  node_modules:
-  mongo:
-
-networks:
-  private:
-  public:
-    name: traefik_webgateway
-    external: true
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MONGO_INITDB_USER_USERNAME: ${DATABASE_USER}
+      MONGO_INITDB_USER_PASSWORD: ${DATABASE_PASSWORD}

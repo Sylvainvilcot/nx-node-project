@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  client-classik:
+    image: node-project/client-classik
+    build:
+      context: .
+      target: builder
+      dockerfile: ./apps/client/classik/Dockerfile
+    command: npm run start client-classik
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "4200:4200"
+    networks:
+      - public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.clientcloud.rule=Host(`cloud.docker.localhost`)
+
+  api-klassiq:
+    image: node-project/api-klassiq
+    build:
+      context: .
+      target: builder
+      dockerfile: ./apps/api/klassiq/Dockerfile
+    command: npm run start api-klassiq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - public
+      - private
+    environment:
+      - MONGO_URL=${MONGO_URL}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.servercloud.rule=(Host(`cloud.docker.localhost`) && PathPrefix(`/api`)) || Host(`api-cloud.docker.localhost`)
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo:/usr/src/app
+    ports:
+      - "27017:27017"
+    networks:
+      - private
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+volumes:
+  mongo:
+
+networks:
+  private:
+  public:
+    name: traefik_webgateway
+    external: true

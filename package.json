@@ -6,6 +6,11 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "docker:dev:up": "docker-compose -f docker-compose.debug.yml up -d",
+    "docker:dev:down": "docker-compose -f docker-compose.debug.yml down",
+    "docker:dev:build": "docker-compose -f docker-compose.debug.yml up -d --build",
+    "docker:dev": "docker-compose -f docker-compose.debug.yml",
+    "publish:web": "docker-compose -f docker-compose.build.yml build && docker-compose -f docker-compose.build.yml push",
     "postinstall": "ngcc --properties es2015 browser module main"
   },
   "private": true,
