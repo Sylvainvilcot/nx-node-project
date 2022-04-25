@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, ConflictException, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { GetUsersDto } from '../dtos/get-users.dto';
 import { UserBodyDto } from '../dtos/user-body.dto';
 import { UserService } from '../services/user.service';
@@ -22,10 +22,4 @@ export class UserController {
     async remove(@Param('id') id: string) {
         return await this.userService.removeUser(id);
     }
-
-    @Post()
-    async add(@Body() body: UserBodyDto) {
-        return await this.userService.addUser(body);
-    }
-
 }

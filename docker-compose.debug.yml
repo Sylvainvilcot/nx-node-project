@@ -39,6 +39,7 @@ services:
     environment:
       - MONGO_URL=${MONGO_URL}
       - SALTORROUNDS=${SALTORROUNDS}
+      - JWT_SECRET=${JWT_SECRET}
     labels:
       - traefik.enable=true
       - traefik.http.routers.servercloud.rule=(Host(`cloud.docker.localhost`) && PathPrefix(`/api`)) || Host(`api-cloud.docker.localhost`)

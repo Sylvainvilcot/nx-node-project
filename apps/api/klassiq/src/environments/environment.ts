@@ -6,5 +6,8 @@ export const environment = {
   },
   hash: {
     saltorround: process.env.SALTORROUNDS
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET
   }
 };

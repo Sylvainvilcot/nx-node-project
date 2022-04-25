@@ -39,6 +39,17 @@ export class UserService {
 
         return item;
     }
+    
+    async get(login: string) {
+        const item = await this.model.findOne({login});
+        
+        if(!item) {
+            throw new NotFoundException();
+        }
+    
+        return item;
+    
+    }
 
     async removeUser(id: string) {
         const item = await this.model.findById(id);
@@ -58,6 +69,6 @@ export class UserService {
 
         const data = {...dto, password: hash};
 
-        return await this.model.create(data);
-    }
+        return await this.model.create(data);        
+    } 
 }
