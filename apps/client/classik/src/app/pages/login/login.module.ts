@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthComponent } from './auth/auth.component';
 import { LoginRoutingModule } from './login-routing.module';
-import { LoginService } from './services/login.service';
+import { LoginService } from '../../services/login.service';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 

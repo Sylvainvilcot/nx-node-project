@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'apps/client/classik/src/environments/environment';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import { User } from '../../../interfaces/User';
+import { User } from '../interfaces/User';
 import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root',

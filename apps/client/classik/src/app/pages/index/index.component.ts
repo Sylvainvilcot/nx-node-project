@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/User';
-import { CloudService } from '../login/services/cloud/cloud.service';
-import { LoginService } from '../login/services/login.service';
+import { CloudService } from '../../services/cloud/cloud.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'node-project-index',
