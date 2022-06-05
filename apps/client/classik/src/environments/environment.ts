@@ -5,8 +5,12 @@
 export const environment = {
   production: false,
   api: {
-    endpoint: 'http://cloud.docker.localhost/api'
+    endpoint: 'http://cloud.docker.localhost/api',    
+  },
+  azure: {
+    start: 'https://management.azure.com/subscriptions/'+ '6f5c044b-fb7c-4159-a16d-2308984a36a7' + '/resourceGroups/'+ 'cloudProject' + '/providers/Microsoft.Compute/virtualMachines/'+ 'cloud-gaming-de' +'/start?api-version=2022-03-01'
   }
+
 };
 
 /*

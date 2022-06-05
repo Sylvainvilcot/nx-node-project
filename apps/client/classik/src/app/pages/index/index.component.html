@@ -1,1 +1,9 @@
-<p>index works!</p>
+<div class="page">
+    <div class="page-header">
+        Accueil
+    </div>
+
+    <div class="page-content">
+        <button *ngIf="user.role === 'admin'" mat-raised-button (click)="startVm()">Load</button>
+    </div>
+</div>

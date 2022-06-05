@@ -13,6 +13,10 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "4200:4200"
+    environment:
+      - SUBSCRIPTION_ID=${SUBSCRIPTION_ID}
+      - RESOURCE_GROUP_NAME=${RESOURCE_GROUP_NAME}
+      - VM_NAME=${VM_NAME}
     networks:
       - public
     labels:

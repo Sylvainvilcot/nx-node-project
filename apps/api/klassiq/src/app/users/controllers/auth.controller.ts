@@ -19,12 +19,12 @@ export class AuthController {
         }
     }
 
-    @Get('/login')
+    @Post('/login')
     async login(@Body() body: ConnectDto) {
         return await this.authService.login(body);
     }
 
-    @Get('/logout')
+    @Post('/logout')
     async logout(@Request() req) {
         return await this.authService.logout(req);
     }

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -11,6 +13,7 @@ import { IndexComponent } from './index.component';
   imports: [
     CommonModule,
     IndexRoutingModule,
+    MatButtonModule
   ]
 })
 export class IndexModule { }
